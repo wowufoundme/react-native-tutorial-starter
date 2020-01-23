@@ -12,19 +12,21 @@ const initialColorsState = {
 };
 
 const reducer = (state, action) => {
-  switch (action.colorToChange) {
-    case 'red':
-      return state.red + action.changeValue > 255 || state.red + action.changeValue < 0
+  switch (action.type) {
+    case 'CHANGE_RED':
+      return state.red + action.payload > 255 || state.red + action.payload < 0
         ? state
-        : { ...state, red: state.red + action.changeValue };
-    case 'green':
-      return state.green + action.changeValue > 255 || state.green + action.changeValue < 0
+        : { ...state, red: state.red + action.payload };
+    case 'CHANGE_GREEN':
+      return state.green + action.payload > 255 || state.green + action.payload < 0
         ? state
-        : { ...state, green: state.green + action.changeValue };
-    case 'blue':
-      return state.blue + action.changeValue > 255 || state.blue + action.changeValue < 0
+        : { ...state, green: state.green + action.payload };
+    case 'CHANGE_BLUE':
+      return state.blue + action.payload > 255 || state.blue + action.payload < 0
         ? state
-        : { ...state, blue: state.blue + action.changeValue };
+        : { ...state, blue: state.blue + action.payload };
+    case 'RESET':
+      return initialColorsState;
     default:
       return state;
   }
@@ -39,8 +41,8 @@ const ColorPicker = () => {
 
   const dispatcher = (colorToChange, amount) => {
     return {
-      colorToChange: colorToChange,
-      changeValue: amount
+      type: colorToChange,
+      payload: amount
     };
   };
 
@@ -48,26 +50,26 @@ const ColorPicker = () => {
     <View>
       <ColorPanel
         color='Red'
-        increaseComponent={() => dispatch(dispatcher('red', COLOR_VALUE))}
-        decreaseComponent={() => dispatch(dispatcher('red', -1 * COLOR_VALUE))}
-        increaseComponentLarge={() => dispatch(dispatcher('red', COLOR_VALUE_LARGE))}
-        decreaseComponentLarge={() => dispatch(dispatcher('red', -1 * COLOR_VALUE_LARGE))}
+        increaseComponent={() => dispatch(dispatcher('CHANGE_RED', COLOR_VALUE))}
+        decreaseComponent={() => dispatch(dispatcher('CHANGE_RED', -1 * COLOR_VALUE))}
+        increaseComponentLarge={() => dispatch(dispatcher('CHANGE_RED', COLOR_VALUE_LARGE))}
+        decreaseComponentLarge={() => dispatch(dispatcher('CHANGE_RED', -1 * COLOR_VALUE_LARGE))}
         value={state.red}
       />
       <ColorPanel
         color='Green'
-        increaseComponent={() => dispatch(dispatcher('green', COLOR_VALUE))}
-        decreaseComponent={() => dispatch(dispatcher('green', -1 * COLOR_VALUE))}
-        increaseComponentLarge={() => dispatch(dispatcher('green', COLOR_VALUE_LARGE))}
-        decreaseComponentLarge={() => dispatch(dispatcher('green', -1 * COLOR_VALUE_LARGE))}
+        increaseComponent={() => dispatch(dispatcher('CHANGE_GREEN', COLOR_VALUE))}
+        decreaseComponent={() => dispatch(dispatcher('CHANGE_GREEN', -1 * COLOR_VALUE))}
+        increaseComponentLarge={() => dispatch(dispatcher('CHANGE_GREEN', COLOR_VALUE_LARGE))}
+        decreaseComponentLarge={() => dispatch(dispatcher('CHANGE_GREEN', -1 * COLOR_VALUE_LARGE))}
         value={state.green}
       />
       <ColorPanel
         color='Blue'
-        increaseComponent={() => dispatch(dispatcher('blue', COLOR_VALUE))}
-        decreaseComponent={() => dispatch(dispatcher('blue', -1 * COLOR_VALUE))}
-        increaseComponentLarge={() => dispatch(dispatcher('blue', COLOR_VALUE_LARGE))}
-        decreaseComponentLarge={() => dispatch(dispatcher('green', -1 * COLOR_VALUE_LARGE))}
+        increaseComponent={() => dispatch(dispatcher('CHANGE_BLUE', COLOR_VALUE))}
+        decreaseComponent={() => dispatch(dispatcher('CHANGE_BLUE', -1 * COLOR_VALUE))}
+        increaseComponentLarge={() => dispatch(dispatcher('CHANGE_BLUE', COLOR_VALUE_LARGE))}
+        decreaseComponentLarge={() => dispatch(dispatcher('CHANGE_BLUE', -1 * COLOR_VALUE_LARGE))}
         value={state.blue}
       />
       <View
@@ -76,12 +78,7 @@ const ColorPicker = () => {
           backgroundColor: renderColor({ red: state.red, green: state.green, blue: state.blue })
         }}
       />
-      {/* <Button
-        title='RESET'
-        onPress={() => {
-          dispatch(dispatcher('red',))
-        }}
-      /> */}
+      <Button title='RESET' onPress={() => dispatch(dispatcher('RESET'))} />
     </View>
   );
 };
