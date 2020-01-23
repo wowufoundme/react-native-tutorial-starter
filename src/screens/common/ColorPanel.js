@@ -4,14 +4,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 const ColorPanel = props => {
   return (
     <View style={styles.panel}>
-      <TouchableOpacity style={styles.button} onPress={() => props.decreaseComponent()}>
-        <Text style={{ color: '#ffffff' }}>-</Text>
+      <TouchableOpacity style={styles.button} onPress={() => props.decreaseComponentLarge()}>
+        <Text style={{ color: '#ffffff' }}>-10</Text>
       </TouchableOpacity>
-      <Text style={{ color: '#222222', marginHorizontal: 50 }}>
+      <TouchableOpacity style={styles.button} onPress={() => props.decreaseComponent()}>
+        <Text style={{ color: '#ffffff' }}>-1</Text>
+      </TouchableOpacity>
+      <Text style={{ color: '#222222', marginHorizontal: 20 }}>
         {props.color}: {props.value}
       </Text>
       <TouchableOpacity style={styles.button} onPress={() => props.increaseComponent()}>
-        <Text style={{ color: '#ffffff' }}>+</Text>
+        <Text style={{ color: '#ffffff' }}>+1</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => props.increaseComponentLarge()}>
+        <Text style={{ color: '#ffffff' }}>+10</Text>
       </TouchableOpacity>
     </View>
   );
@@ -29,11 +35,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#222222',
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50
+    borderRadius: 50,
+    marginRight: 12
   }
 });
 
