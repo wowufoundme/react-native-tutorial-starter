@@ -11,6 +11,7 @@ const HomeScreen = props => {
       <Button title='Go to Lists screen' onPress={() => navigate('List')} />
       <Button title='Go to Image screen' onPress={() => navigate('Images')} />
       <Button title='Go to Colors screen' onPress={() => navigate('Colors')} />
+      <Button title='Go to ColorPicker screen' onPress={() => navigate('ColorPicker')} />
       {/* <TouchableOpacity onPress={() => navigate('List')}>
         <Text>Go to List Screen</Text>
       </TouchableOpacity> */}
