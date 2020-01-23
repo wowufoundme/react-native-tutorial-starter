@@ -5,11 +5,12 @@ const HomeScreen = props => {
   const { navigate } = props.navigation;
 
   return (
-    <View>
+    <View style={styles.viewStyles}>
       <Text style={styles.text}>Home Screen</Text>
       <Button title='Go to components screen' onPress={() => navigate('Components')} />
       <Button title='Go to Lists screen' onPress={() => navigate('List')} />
       <Button title='Go to Image screen' onPress={() => navigate('Images')} />
+      <Button title='Go to Colors screen' onPress={() => navigate('Colors')} />
       {/* <TouchableOpacity onPress={() => navigate('List')}>
         <Text>Go to List Screen</Text>
       </TouchableOpacity> */}
@@ -21,6 +22,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center'
+  },
+  viewStyles: {
+    flex: 1,
+    justifyContent: 'space-around'
   }
 });
 
